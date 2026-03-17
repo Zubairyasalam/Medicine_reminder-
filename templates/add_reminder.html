@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Reminder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f0f9ff; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card {
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      background: #ffffff;
+      padding: 30px;
+      border: 1px solid #e3f2fd; 
+    }
+    h2 {
+      font-weight: bold;
+      color: #0d6efd; 
+    }
+    .form-label {
+      font-weight: 600;
+      color: #444;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #0b5ed7;
+      transform: scale(1.04);
+      box-shadow: 0 6px 12px rgba(13,110,253,0.3);
+    }
+    .btn-secondary {
+      border-radius: 12px;
+      background: #adb5bd;
+      border: none;
+    }
+    .btn-secondary:hover {
+      background: #6c757d;
+    }
+    .other-input {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function toggleOtherMedicine(select) {
+      const otherInput = document.getElementById('otherMedicine');
+      if (select.value === 'Other') {
+        otherInput.style.display = 'block';
+        otherInput.required = true;
+      } else {
+        otherInput.style.display = 'none';
+        otherInput.required = false;
+      }
+    }
+  </script>
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100">
+  <div class="container" style="max-width: 500px;">
+    <div class="card">
+      <h2 class="text-center mb-4">💊 Add Dosage Reminder</h2>      
+      <form method="POST" action="{{ url_for('add_reminder') }}">
+        <div class="mb-3">
+          <label class="form-label">Medicine Name</label>
+          <select class="form-select" name="medicine" required onchange="toggleOtherMedicine(this)">
+            <option value="" disabled selected>-- Select Medicine --</option>
+            <option>Paracetamol</option>
+            <option>Amoxicillin</option>
+            <option>Vitamin C</option>
+            <option>Ibuprofen</option>
+            <option>Cetirizine</option>
+            <option>Azithromycin</option>
+            <option>Diclofenac</option>
+            <option>Metformin</option>
+            <option>Amlodipine</option>
+            <option>Omeprazole</option>
+            <option>Other</option>
+          </select>
+          <input type="text" name="other_medicine" id="otherMedicine" class="form-control other-input" placeholder="Enter medicine name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Dosage</label>
+          <select class="form-select" name="dosage" required>
+            <option value="" disabled selected>-- Select Dosage --</option>
+            <option>1 Tablet</option>
+            <option>2 Tablets</option>
+            <option>½ Tablet</option>
+            <option>5ml Syrup</option>
+            <option>10ml Syrup</option>
+            <option>15ml Syrup</option>
+            <option>1 Capsule</option>
+            <option>2 Capsules</option>
+            <option>1 Injection</option>
+            <option>Drops (as prescribed)</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Time</label>
+          <select class="form-select" name="time" required>
+            <option value="" disabled selected>-- Select Time --</option>
+            <option>Morning (7:00 AM)</option>
+            <option>Morning (8:00 AM)</option>
+            <option>Afternoon (12:00 PM)</option>
+            <option>Afternoon (1:00 PM)</option>
+            <option>Evening (6:00 PM)</option>
+            <option>Evening (7:00 PM)</option>
+            <option>Night (9:00 PM)</option>
+            <option>Night (10:00 PM)</option>
+            <option>Before Meals</option>
+            <option>After Meals</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Duration</label>
+          <select class="form-select" name="duration" required>
+            <option value="" disabled selected>-- Select Duration --</option>
+            <option>3 Days</option>
+            <option>5 Days</option>
+            <option>7 Days</option>
+            <option>10 Days</option>
+            <option>15 Days</option>
+            <option>21 Days</option>
+            <option>1 Month</option>
+            <option>2 Months</option>
+            <option>Until Doctor Advice</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">💾 Save Reminder</button>
+      </form>
+      <div class="text-center mt-3">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary w-100">⬅ Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
